@@ -11,9 +11,24 @@
 function chunk1(array, size) {
     let result = [];
 
-    for (let i = 0; i < array.length; i + size) {
+    // тут инкрементить не нужно потому что исходная arr будет отжираться за счет splice и меняться за счет этого
+    for (let i = 0; i < array.length;) {
         // array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
         const chunk = array.splice(i, size);
+        result.push(chunk);
+    }
+    return result;
+}
+
+function chunk2(array, size) {
+    let result = [];
+
+    // use += or ++ assignment in final statement
+    for (let i = 0; i < array.length; i += size) {
+
+        // slice(start, end) ; end is not included
+        // The slice() method returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included) where start and end represent the index of items in that array. The original array will not be modified.
+        let chunk = array.slice(i, i + size);
         result.push(chunk);
     }
     return result;
@@ -37,4 +52,4 @@ function chunk(array, size) {
     return result;
 }
 
-module.exports = chunk;
+module.exports = chunk2;
