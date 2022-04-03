@@ -4,16 +4,44 @@
 // with N levels using the # character.  Make sure the
 // pyramid has spaces on both the left *and* right hand sides
 // --- Examples
-//   pyramid(1)
+//   pyramid(1) / 1
 //       '#'
-//   pyramid(2)
+//   pyramid(2) // 3 length
 //       ' # '
 //       '###'
 //   pyramid(3)
 //       '  #  '
 //       ' ### '
-//       '#####'
+//       '#####' // 5 length
+//   pyramid(4)
+//      '   #   '
+//      '  ###  '
+//      ' ##### '
+//      '#######' // 7 length
 
-function pyramid(n) {}
+//   pyramid(5)
+//     '    #    '
+//     '   ###   '
+//     '  #####  '  // 5
+//     ' ####### ' // 7 pounds  -> number of pounds for a row === length of str for a pyramid(row) which
+//     '#########' // 9 length
+
+// ax + b = c;
+
+// 2n - 1
+
+// lenght grows by 2 for each row
+
+//  row length is (2n - 1), in the center there is always a pound
+//  and before and after it there are (n) symbols of which (n - row) is spaces and (row) punds
+
+function pyramid(n) {
+    for (let i = 0; i < n; i++) {
+        const spaces = new Array(n - 1 - i).fill(' ').join('');
+        const pounds = new Array(i).fill('#').join('');
+        const str = spaces + pounds + '#' + pounds + spaces;
+        console.log(str);
+    }
+}
 
 module.exports = pyramid;
