@@ -47,7 +47,7 @@ function pyramid1(n) {
 // (2n - 1) - (n - row) = n -1 + row
 // (n - row) spaces (row #) (n - row ) spaces
 
-const pyramid = (n) => {
+const pyramid2 = (n) => {
     for (let row = 0; row < n; row++) {
         let str = '';
         for (let i = 0; i < 2 * n - 1; i++) {
@@ -61,6 +61,24 @@ const pyramid = (n) => {
         }
         console.log(str, str.length);
     }
+}
+
+const pyramid = (n, row = 0, str = '') => {
+    if (row === n) {
+        return;
+    }
+    if (str.length < n - row - 1) {
+        // don't forget to return here either to use else further down in ifs
+        return pyramid(n, row, str += ' ');
+    }
+    if (str.length <= n + row - 1) {
+        return pyramid(n, row, str += '#');
+    }
+    if (str.length < 2 * n - 1) {
+        return pyramid(n, row, str += ' ');
+    }
+    console.log(str, str.length);
+    return pyramid(n, row + 1, '');
 }
 
 module.exports = pyramid;
