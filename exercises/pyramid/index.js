@@ -30,17 +30,36 @@
 
 // 2n - 1
 
-// lenght grows by 2 for each row
+// length grows by 2 for each row
 
 //  row length is (2n - 1), in the center there is always a pound
 //  and before and after it there are (n) symbols of which (n - row) is spaces and (row) punds
 
-function pyramid(n) {
+function pyramid1(n) {
     for (let i = 0; i < n; i++) {
         const spaces = new Array(n - 1 - i).fill(' ').join('');
         const pounds = new Array(i).fill('#').join('');
         const str = spaces + pounds + '#' + pounds + spaces;
         console.log(str);
+    }
+}
+
+// (2n - 1) - (n - row) = n -1 + row
+// (n - row) spaces (row #) (n - row ) spaces
+
+const pyramid = (n) => {
+    for (let row = 0; row < n; row++) {
+        let str = '';
+        for (let i = 0; i < 2 * n - 1; i++) {
+            if (str.length < n - row - 1) {
+                str += ' ';
+            } else if (str.length <= n + row - 1) {
+                str += '#';
+            } else {
+                str += ' ';
+            }
+        }
+        console.log(str, str.length);
     }
 }
 
