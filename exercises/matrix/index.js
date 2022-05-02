@@ -33,8 +33,8 @@ function matrix1(n) {
         let times = 0;
 
         while (value <= n * n) {
+            // top row
             if (times % 4 === 0) {
-                console.log('case 0');
                 for (let columnIndex = columnStart; columnIndex <= columnEnd; columnIndex++) {
                     matrix[rowStart][columnIndex] = value;
                     value++;
@@ -42,8 +42,8 @@ function matrix1(n) {
                 rowStart++;
                 times++;
             }
+            // right column
             else if (times % 4 === 1) {
-                console.log('case 1');
                 for (let rowIndex = rowStart; rowIndex <= rowEnd; rowIndex++) {
                     matrix[rowIndex][columnEnd] = value;
                     value++;
@@ -51,8 +51,8 @@ function matrix1(n) {
                 columnEnd--;
                 times++;
             }
+            // bottom row
             else if (times % 4 === 2) {
-                console.log('case 2');
                 for (let columnIndex = columnEnd; columnIndex >= columnStart; columnIndex--) {
                     matrix[rowEnd][columnIndex] = value;
                     value++;
@@ -60,9 +60,8 @@ function matrix1(n) {
                 rowEnd--;
                 times++;
             }
+            // left column
             else if (times % 4 === 3) {
-                console.log('case 3');
-
                 for (let rowIndex = rowEnd; rowIndex >= rowStart; rowIndex--) {
                     matrix[rowIndex][columnStart] = value;
                     value++;
