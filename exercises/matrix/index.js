@@ -14,7 +14,7 @@
 //     [12, 13, 14, 5],
 //     [11, 16, 15, 6],
 //     [10,  9,  8, 7]]
-function matrix(n) {
+function matrix1(n) {
 
     // create empty array and fill it with new empty arrays
     let result = new Array(n);
@@ -76,6 +76,82 @@ function matrix(n) {
 
     console.log('start iterative function');
     fillMatrixIterative(n, result);
+
+    // console.log the result
+    for (let element of result) {
+        console.log(element);
+    }
+
+    return result;
+}
+
+
+function matrix(n) {
+    let result = new Array(n);
+
+    for (let i = 0; i < n; i++) {
+        result[i] = new Array(n);
+    }
+
+    const fillMatrixRecursive =
+        (n = 0, matrix = [], value = 1, columnStart = 0, columnEnd = 0, columnIndex = 0, rowStart = 0, rowEnd = 0, rowIndex = 0, times = 0) => {
+            if (value === n * n) {
+                matrix[rowIndex][columnIndex] = value;
+                return;
+            }
+
+            if (times % 4 === 0) {
+                if (columnIndex < columnEnd) {
+                    matrix[rowStart][columnIndex] = value;
+                    value++;
+                    columnIndex++;
+                    return fillMatrixRecursive(n, matrix, value, columnStart, columnEnd, columnIndex, rowStart, rowEnd, rowIndex, times);
+                }
+                rowStart++;
+                times++;
+            }
+
+            else if (times % 4 === 1) {
+                if (rowIndex < rowEnd) {
+                    matrix[rowIndex][columnEnd] = value;
+                    value++;
+                    rowIndex++;
+                    return fillMatrixRecursive(n, matrix, value, columnStart, columnEnd, columnIndex, rowStart, rowEnd, rowIndex, times);
+                }
+                columnEnd--;
+                times++;
+            }
+
+            else if (times % 4 === 2) {
+                if (columnIndex > columnStart) {
+                    matrix[rowEnd][columnIndex] = value;
+                    value++;
+                    columnIndex--;
+                    return fillMatrixRecursive(n, matrix, value, columnStart, columnEnd, columnIndex, rowStart, rowEnd, rowIndex, times);
+                }
+                rowEnd--;
+                times++;
+            }
+
+            else if (times % 4 === 3) {
+                if (rowIndex > rowStart) {
+                    matrix[rowIndex][columnStart] = value;
+                    value++;
+                    rowIndex--;
+                    return fillMatrixRecursive(n, matrix, value, columnStart, columnEnd, columnIndex, rowStart, rowEnd, rowIndex, times);
+                }
+                columnStart++;
+                times++;
+            }
+
+            console.log('value', value, 'columnStart', columnStart, 'columnEnd', columnEnd, 'columnIndex', columnIndex, 'rowStart', rowStart,
+                'rowEnd', rowEnd, 'rowIndex', rowIndex, 'times', times);
+
+            return fillMatrixRecursive(n, matrix, value, columnStart, columnEnd, columnIndex, rowStart, rowEnd, rowIndex, times);
+
+        }
+
+    fillMatrixRecursive(n, result, 1, 0, n - 1, 0, 0, n - 1, 0, 0);
 
     // console.log the result
     for (let element of result) {
